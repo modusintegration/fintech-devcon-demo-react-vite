@@ -1,0 +1,1 @@
+export const baseURL = 'https://portx-oba-proc-api.dev.pre.demobank.tenants.portx.io/portx-oba-proc-api/1.0'
