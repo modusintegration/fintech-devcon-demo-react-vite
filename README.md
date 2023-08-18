@@ -3,7 +3,9 @@
 https://yxp2w8-5173.csb.app/
 
 ## Purpose
-The purpose of this demo is to show how PortX deploys a SSO app with our Stack. This UI is interacting with both mambu and cis cores.
+The purpose of this demo is to show how PortX deploys an SSO app with our Stack.
+This UI is interacting with both mambu and cis cores.
+In the UI you will be able to send money back and forth.
 
 ## API Docs
 https://workshop.dev.custom.demos.tenant-1.portx.io/portx-openbanking-docs/
