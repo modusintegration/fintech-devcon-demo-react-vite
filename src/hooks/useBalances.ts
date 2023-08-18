@@ -1,6 +1,8 @@
+import { notifications } from "@mantine/notifications";
 import { useState } from "react";
 import getAccountsBalances from "../api/getAccountsBalances";
 import { Balances } from "../types/balances";
+import { dollarFormat } from "../utils/dollarFormat";
 
 interface IFetchBalances {
   csiAccountId: string;
@@ -24,8 +26,46 @@ const initialState: StateBalancesType = {
   mambuBalances: [intialBalanceState],
 };
 
+const oldBalances = {
+  csi: -1,
+  mambu: -1,
+};
+
 function useBalances() {
   const [balances, setBalances] = useState<StateBalancesType>(initialState);
+  const [notificationsOn, setNotificationsOn] = useState(false);
+
+  if (
+    (balances.csiBalances[0].amount > -1 ||
+      balances.mambuBalances[0].amount > -1) &&
+    !notificationsOn
+  )
+    setNotificationsOn(true);
+
+  const receivedNotification = (message: string) =>
+    notifications.show({
+      color: "green",
+      title: "🎉 Great news",
+      message,
+    });
+
+  const receivedCSIMoney = balances.csiBalances[0].amount - oldBalances.csi;
+
+  if (notificationsOn && receivedCSIMoney > 0)
+    receivedNotification(
+      `You received $${dollarFormat(receivedCSIMoney)} in your CSI account`
+    );
+
+  const receivedMAMBUMoney =
+    balances.mambuBalances[0].amount - oldBalances.mambu;
+
+  if (notificationsOn && receivedMAMBUMoney > 0)
+    receivedNotification(
+      `You received $${dollarFormat(receivedMAMBUMoney)} in your MAMBU account`
+    );
+
+  oldBalances.csi = balances.csiBalances[0].amount;
+  oldBalances.mambu = balances.mambuBalances[0].amount;
 
   const fetchBalances = async ({
     csiAccountId,
