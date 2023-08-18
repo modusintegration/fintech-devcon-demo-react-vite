@@ -1,7 +1,6 @@
 import { Person } from "../types/person";
 import { getAccessToken } from "../utils/getAccessToken";
 import { baseURL } from "./constants";
-import { person } from "./mocks";
 
 function getPersonByName(
   servicerId: "csi" | "mambu",
@@ -26,8 +25,7 @@ function getPersonByName(
     requestOptions
   )
     .then((response) => response.json())
-    .then((result) => result)
-    .catch((error) => console.log("error", error));
+    .then((result) => result);
 }
 
 export default getPersonByName;

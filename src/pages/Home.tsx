@@ -19,6 +19,7 @@ import useTransactions from "../hooks/useTransactions";
 import Transactions from "../molecules/Transactions";
 import useAllPersons from "../hooks/useAllPersons";
 import useTransfeer, { AccountDetailsType } from "../hooks/useTransfeer";
+import { notifications } from "@mantine/notifications";
 
 interface FormValues {
   withdrawAccountServicer: "csi" | "mambu" | null;
@@ -63,10 +64,18 @@ function Home() {
     setUserName(localstorageUserName);
   }, []);
 
+  const reOpenSignIn = () => {
+    notifications.show({
+      color: "red",
+      title: "Are you sure about the name?",
+      message: "Please, type your name again.",
+    });
+    openSignIn();
+  };
+
   useEffect(() => {
     if (!userName) return;
-    fetchPerson(userName);
-    fetchAllPersons();
+    fetchPerson(userName).then(fetchAllPersons).catch(reOpenSignIn);
   }, [userName]);
 
   useEffect(() => {
