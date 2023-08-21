@@ -24,8 +24,9 @@ Feel free to exlpore out Mambu core api repo https://github.com/modusintegration
 Figure out how to generate QR code from url for the Google doc.  We need to print those out somehow.
 
 ### Run local with docker
-
-
+make build
+make run
+open browser and navigate to http://localhost:80
 
 For the Google sheet:
 Name: {will come from Juan’s spreadsheet}
