@@ -1,0 +1,59 @@
+name: Staging Deployment
+
+env:
+  GITHUB_PACKAGES_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN  }}
+
+on:
+  push:
+    branches: [main] # switch to main for test
+
+jobs:
+  deploy-docker-image:
+    runs-on: ubuntu-latest
+    # Software available? See https://github.com/actions/virtual-environments/blob/main/images/linux/Ubuntu1804-README.md
+    env:
+      LOCAL_IMAGE_TAG: latest
+      DOCKER_IMAGE_NAME: fintech-devcon-demo-react-vite
+      ECR_REPOSITORY: oba/fintech-devcon-demo-react-vite
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set image tag
+        id: set_image_tag
+        run: |
+          export IMAGE_TAG=$GITHUB_REF_NAME-$GITHUB_SHA
+          echo IMAGE_TAG: $IMAGE_TAG
+          echo ::set-output name=image_tag::$IMAGE_TAG
+      - name: Build stg docker image
+        run: make build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.DEMOBANK_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.DEMOBANK_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Push image to Amazon ECR
+        env:
+          IMAGE_TAG: ${{ steps.set_image_tag.outputs.image_tag }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          echo creating docker image with tag: $IMAGE_TAG
+          docker tag $DOCKER_IMAGE_NAME:$LOCAL_IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          aws ecr get-login-password --region us-west-2  | docker login --username AWS --password-stdin $ECR_REGISTRY
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Push 'latest' image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: |
+          docker tag $DOCKER_IMAGE_NAME:$LOCAL_IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$LOCAL_IMAGE_TAG
+          aws ecr get-login-password --region us-west-2  | docker login --username AWS --password-stdin $ECR_REGISTRY
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$LOCAL_IMAGE_TAG
+      - name: Logout of Amazon ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
