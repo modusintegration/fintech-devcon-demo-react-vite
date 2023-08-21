@@ -17,25 +17,29 @@ function usePerson() {
     const mambuPromise = getPersonByName("mambu", name);
     const csiPromise = getPersonByName("csi", name);
 
-    return Promise.all([mambuPromise, csiPromise]).then(([mambuResult, csiResult]) => {
-      const profiles: StatePerson = {
-        csi: { personId: "" } as Person,
-        mambu: { personId: "" } as Person,
-      };
-      if (mambuResult && mambuResult.length) {
-        const personMambuProfile = mambuResult.filter(
-          (item) => item.name === name
-        );
-        profiles.mambu = personMambuProfile[0];
-      }
+    return Promise.all([mambuPromise, csiPromise]).then(
+      ([mambuResult, csiResult]) => {
+        const profiles: StatePerson = {
+          csi: { personId: "" } as Person,
+          mambu: { personId: "" } as Person,
+        };
+        if (!mambuResult?.length || !csiResult?.length) throw Error;
 
-      if (csiResult && csiResult.length) {
-        //const personCsiProfile = csiResult.filter((item) => item.name === name);
-        profiles.csi = csiResult[0];
-      }
+        if (mambuResult && mambuResult.length) {
+          const personMambuProfile = mambuResult.filter(
+            (item) => item.name === name
+          );
+          profiles.mambu = personMambuProfile[0];
+        }
 
-      setPerson({ ...profiles });
-    });
+        if (csiResult && csiResult.length) {
+          //const personCsiProfile = csiResult.filter((item) => item.name === name);
+          profiles.csi = csiResult[0];
+        }
+
+        setPerson({ ...profiles });
+      }
+    );
   };
 
   return { person, fetchPerson };
