@@ -16,7 +16,7 @@ function getAccountsBalances(
     headers: myHeaders,
     redirect: "follow",
   };
-  if (servicerId === "csi") return Promise.resolve(balances);
+
   return fetch(`${baseURL}/accounts/${accountId}/balances`, requestOptions)
     .then((response) => response.json())
     .then((result) => result)

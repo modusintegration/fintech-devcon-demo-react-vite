@@ -1,7 +1,6 @@
 import { AccountDetails } from "../types/transactions";
 import { getAccessToken } from "../utils/getAccessToken";
 import { baseURL } from "./constants";
-import { transactions } from "./mocks";
 
 function getAccountTransactions(
   servicerId: "csi" | "mambu",
@@ -16,7 +15,7 @@ function getAccountTransactions(
     headers: myHeaders,
     redirect: "follow",
   };
-  if (servicerId === "csi") return Promise.resolve(transactions);
+
   return fetch(`${baseURL}/accounts/${accountId}/transactions`, requestOptions)
     .then((response) => response.json())
     .then((result) => result)

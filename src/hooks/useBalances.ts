@@ -72,7 +72,10 @@ function useBalances() {
     mambuAccountId,
   }: IFetchBalances) => {
     try {
-      const csiBalancePromise = getAccountsBalances("csi", csiAccountId);
+      const csiBalancePromise = getAccountsBalances(
+        "csi",
+        csiAccountId.split("-").pop()!
+      );
       const mambuBalancePromise = getAccountsBalances("mambu", mambuAccountId);
       Promise.all([csiBalancePromise, mambuBalancePromise]).then(
         ([csiBalanceResult, mambuBalanceResult]) => {

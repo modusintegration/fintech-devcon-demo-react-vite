@@ -15,10 +15,10 @@ const initialState: StateAccountsType = {
 function useAccounts() {
   const [accounts, setAccounts] = useState<StateAccountsType>(initialState);
 
-  const fetchAccounts = async (personId: string) => {
+  const fetchAccounts = async (csiPersonId: string, mambuPersonId: string) => {
     try {
-      const csiAccountPromise = getAccountsByPersonId("csi", personId);
-      const mambuAccountPromise = getAccountsByPersonId("mambu", personId);
+      const csiAccountPromise = getAccountsByPersonId("csi", csiPersonId);
+      const mambuAccountPromise = getAccountsByPersonId("mambu", mambuPersonId);
       Promise.all([csiAccountPromise, mambuAccountPromise]).then(
         ([csiAccountResult, mambuAccountResult]) => {
           if (csiAccountResult && mambuAccountResult)

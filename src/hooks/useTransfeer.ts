@@ -15,6 +15,10 @@ function useTransfeer() {
     to: AccountDetailsType,
     ammount: string
   ) => {
+    if (from.servicerId === "csi")
+      from.accountId = from.accountId.split("-").pop()!;
+
+    if (to.servicerId === "csi") to.accountId = to.accountId.split("-").pop()!;
     setIsLoading(true);
     let rollbackRetries = 0;
     const rollback = async () => {

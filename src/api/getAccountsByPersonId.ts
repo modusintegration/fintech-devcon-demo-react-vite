@@ -1,7 +1,6 @@
 import { PersonAccounts } from "../types/personAccount";
 import { getAccessToken } from "../utils/getAccessToken";
 import { baseURL } from "./constants";
-import { account } from "./mocks";
 
 function getAccountsByPersonId(
   servicerId: "csi" | "mambu",
@@ -17,8 +16,6 @@ function getAccountsByPersonId(
     redirect: "follow",
   };
 
-  if (servicerId === "csi")
-    return Promise.resolve({ personId, personName: "", accounts: [account] });
   return fetch(`${baseURL}/persons/${personId}/accounts`, requestOptions)
     .then((response) => response.json())
     .then((result) => result)

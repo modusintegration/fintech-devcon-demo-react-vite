@@ -24,7 +24,7 @@ import { notifications } from "@mantine/notifications";
 interface FormValues {
   withdrawAccountServicer: "csi" | "mambu" | null;
   depositAccountServicer: "csi" | "mambu" | null;
-  personIdToDeposit: string;
+  personNameToDeposit: string;
   amount: string;
 }
 
@@ -34,6 +34,8 @@ function Home() {
   const [openedSignIn, { close: closeSignIn, open: openSignIn }] =
     useDisclosure(false);
   const { person, fetchPerson } = usePerson();
+  const { person: personToDeposit, fetchPerson: fetchPersonToDeposit } =
+    usePerson();
   const {
     accounts: accountsFromLoggedUser,
     fetchAccounts: fetchAccountsFromLoggedUser,
@@ -53,7 +55,7 @@ function Home() {
     initialValues: {
       withdrawAccountServicer: null,
       depositAccountServicer: null,
-      personIdToDeposit: "",
+      personNameToDeposit: "",
       amount: "",
     },
   });
@@ -79,8 +81,9 @@ function Home() {
   }, [userName]);
 
   useEffect(() => {
-    if (person?.personId) fetchAccountsFromLoggedUser(person.personId);
-  }, [person?.personId]);
+    if (person?.csi.personId && person?.mambu.personId)
+      fetchAccountsFromLoggedUser(person.csi.personId, person.mambu.personId);
+  }, [person?.mambu.personId, person?.csi.personId]);
 
   useEffect(() => {
     if (
@@ -115,22 +118,29 @@ function Home() {
   };
 
   useEffect(() => {
-    if (form.values.personIdToDeposit)
-      fetchAccountsFromReceiverUser(form.values.personIdToDeposit);
-  }, [form.values.personIdToDeposit]);
+    if (form.values.personNameToDeposit)
+      fetchPersonToDeposit(form.values.personNameToDeposit);
+  }, [form.values.personNameToDeposit]);
+
+  useEffect(() => {
+    fetchAccountsFromReceiverUser(
+      personToDeposit.csi.personId,
+      personToDeposit.mambu.personId
+    );
+  }, [personToDeposit.csi.personId, personToDeposit.mambu.personId]);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const {
       withdrawAccountServicer,
       depositAccountServicer,
-      personIdToDeposit,
+      personNameToDeposit,
       amount,
     } = form.values;
     if (
       !withdrawAccountServicer ||
       !depositAccountServicer ||
-      !personIdToDeposit ||
+      !personNameToDeposit ||
       !amount
     )
       return;
@@ -184,12 +194,12 @@ function Home() {
             label="Send payment to:"
             placeholder="choose the lucky person"
             data={
-              persons?.map((item) => ({
-                value: item.personId,
-                label: item.name,
+              persons?.map(({ name }) => ({
+                value: name,
+                label: name,
               })) || []
             }
-            {...form.getInputProps("personIdToDeposit")}
+            {...form.getInputProps("personNameToDeposit")}
           />
           <Radio.Group
             required
