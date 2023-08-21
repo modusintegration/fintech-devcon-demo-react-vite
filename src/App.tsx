@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Home from "./pages/Home";
 import { Loader } from "@mantine/core";

@@ -4,9 +4,9 @@ function getToken(): Promise<string> {
 
   const urlencoded = new URLSearchParams();
   urlencoded.append("grant_type", "client_credentials");
-  urlencoded.append("client_id", "wires-client:dev");
-  urlencoded.append("client_secret", "EPq2ZCsmqzYF3mKePAmGs5DWtIdNLOB7");
-  urlencoded.append("scope", "kevin-test2-wires-api:dev");
+  urlencoded.append("client_id", "447f2a9f-6d42-4e7d-806b-fe5fe130a080");
+  urlencoded.append("client_secret", "Zds4sn7jfRpBznsk4Dz8dwNhaqnpWCQf");
+  urlencoded.append("scope", "demobank:operator");
 
   const requestOptions: RequestInit = {
     method: "POST",
@@ -17,7 +17,7 @@ function getToken(): Promise<string> {
   };
 
   return fetch(
-    "https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/kevin-test2/protocol/openid-connect/token",
+    "https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
     requestOptions
   )
     .then((response) => response.json())
