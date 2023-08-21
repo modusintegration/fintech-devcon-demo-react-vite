@@ -2,20 +2,30 @@
 
 https://yxp2w8-5173.csb.app/
 
+https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io/
+
 ## Purpose
-The purpose of this demo is to show how PortX deploys an SSO app with our Stack.
+The purpose of this demo is to show how PortX deploys an SSO app with our Stack (Github/AWS/ArgoCD/Grafana).
 This UI is interacting with both mambu and cis cores.
 In the UI you will be able to send money back and forth.
 
 ## API Docs
 https://workshop.dev.custom.demos.tenant-1.portx.io/portx-openbanking-docs/
 
+Note these are the full api specs and our demo supports `/accounts` and `/persons`
+
+## Auth
+For Auth we are using PortX IAM which using Keycloak. There are 2 roles configured for this demo
+`admin` and `operator`. Internally we used `admin`, which is used for creating persons and accounts. Everyone will 
+have access to `operator`, the credentials have been hardcoded in
+this demo UI, and you can also find the credentials in the postman collection.
+
 ## Postman Collection
 Here is a collection of calls you can make to our demo api.
-Note: You will need a CliendID and Secret to get an auth token, you will also need an identity from our excel sheet.
+Note: You will need a CliendID and Secret to get an auth token, .
 
 ## Mambu Core API Repo
-Feel free to exlpore out Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
+Feel free to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
 
 ## Getting Started
 
