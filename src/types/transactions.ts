@@ -2,7 +2,7 @@ interface Transaction {
   transactionId: string;
   amount: number;
   creditDebitIndicator: string;
-  domain: string;
+  domain?: string;
   family: string;
   status: string;
   reversalIndicator: boolean;
@@ -11,7 +11,7 @@ interface Transaction {
   charges: number;
   interest: number;
   currentBalance: number;
-  subfamily: string;
+  subfamily?: string;
 }
 
 export interface AccountDetails {

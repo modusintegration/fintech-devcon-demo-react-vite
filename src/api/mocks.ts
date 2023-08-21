@@ -1,3 +1,5 @@
+import { AccountDetails } from "../types/transactions";
+
 export const person = {
   genericIdentifiers: [
     {
@@ -115,19 +117,19 @@ export const personB = {
   personId: "8a44a29e850791680185081ae1c40f3d",
 };
 
-export const transactions = {
+export const transactions: AccountDetails = {
   accountId: "8a44af33860351cb018603be2671135f",
   accountNumber: "ZFRH840",
   accountType: "REGULAR_SAVINGS",
   currency: "USD",
   currentBalance: "6.22",
   availableBalance: "6.22",
+  ownershipType: "Owner",
   transactions: [
     {
       transactionId: "8a44b37889bca9760189d1dae956185d",
       amount: -3,
       creditDebitIndicator: "Debit",
-      bankTransactionDomain: "AccountManagement",
       family: "WITHDRAWAL",
       status: "Booked",
       reversalIndicator: false,
@@ -141,7 +143,6 @@ export const transactions = {
       transactionId: "8a44dffe89bc44200189d1db28256b82",
       amount: 1,
       creditDebitIndicator: "Credit",
-      bankTransactionDomain: "AccountManagement",
       family: "DEPOSIT",
       status: "Booked",
       reversalIndicator: false,
@@ -155,7 +156,6 @@ export const transactions = {
       transactionId: "8a44dffe89bc44200189bd26f5c91b34",
       amount: -3,
       creditDebitIndicator: "Debit",
-      bankTransactionDomain: "AccountManagement",
       family: "WITHDRAWAL",
       status: "Booked",
       reversalIndicator: false,
@@ -169,7 +169,6 @@ export const transactions = {
       transactionId: "8a44b37889bca9760189c27ccac63384",
       amount: 1,
       creditDebitIndicator: "Credit",
-      bankTransactionDomain: "AccountManagement",
       family: "DEPOSIT",
       status: "Booked",
       reversalIndicator: false,
@@ -183,7 +182,6 @@ export const transactions = {
       transactionId: "8a44a3dc89bc448c0189bd26f6c31c56",
       amount: -3,
       creditDebitIndicator: "Debit",
-      bankTransactionDomain: "AccountManagement",
       family: "WITHDRAWAL",
       status: "Booked",
       reversalIndicator: false,
@@ -197,7 +195,6 @@ export const transactions = {
       transactionId: "8a44b37889bca9760189c27ccac63380",
       amount: 1,
       creditDebitIndicator: "Credit",
-      bankTransactionDomain: "AccountManagement",
       family: "DEPOSIT",
       status: "Booked",
       reversalIndicator: false,
@@ -211,7 +208,6 @@ export const transactions = {
       transactionId: "8a44af33860351cb018603bf1b041376",
       amount: -3,
       creditDebitIndicator: "Debit",
-      bankTransactionDomain: "AccountManagement",
       family: "WITHDRAWAL",
       status: "Booked",
       reversalIndicator: false,
@@ -225,7 +221,6 @@ export const transactions = {
       transactionId: "8a44af33860351cb018603becc3b136d",
       amount: 5,
       creditDebitIndicator: "Credit",
-      bankTransactionDomain: "AccountManagement",
       family: "DEPOSIT",
       status: "Booked",
       reversalIndicator: false,
@@ -239,7 +234,6 @@ export const transactions = {
       transactionId: "8a44af33860351cb018603bec7261369",
       amount: 10.22,
       creditDebitIndicator: "Credit",
-      bankTransactionDomain: "AccountManagement",
       family: "DEPOSIT",
       status: "Booked",
       reversalIndicator: false,
