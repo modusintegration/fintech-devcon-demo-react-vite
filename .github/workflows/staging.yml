@@ -1,8 +1,5 @@
 name: Staging Deployment
 
-env:
-  GITHUB_PACKAGES_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN  }}
-
 on:
   push:
     branches: [main] # switch to main for test
