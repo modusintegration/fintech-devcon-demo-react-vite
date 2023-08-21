@@ -30,7 +30,7 @@ function useTransactions() {
     try {
       const csiTransactionsPromise = getAccountTransactions(
         "csi",
-        csiAccountId
+        csiAccountId.split("-").pop()!
       );
       const mambuTransactionsPromise = getAccountTransactions(
         "mambu",

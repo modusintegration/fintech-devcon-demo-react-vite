@@ -19,7 +19,7 @@ function Transactions({ transactions }: ITransactions) {
 
   const csiRows = transactions.csiTransactions.map((item) => (
     <tr key={item.transactionId}>
-      <td>{item.family}</td>
+      <td>{item.amount > 0 ? "DEPOSIT" : "WITHDRAW"}</td>
       <td>{formatDate(item.creationDate)}</td>
       <td align="center">{dollarFormat(item.amount)}</td>
       <td align="center">{dollarFormat(item.currentBalance)}</td>
