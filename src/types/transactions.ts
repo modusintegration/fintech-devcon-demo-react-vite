@@ -12,6 +12,7 @@ interface Transaction {
   interest: number;
   currentBalance: number;
   subfamily?: string;
+  description: string;
 }
 
 export interface AccountDetails {

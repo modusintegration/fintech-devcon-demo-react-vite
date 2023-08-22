@@ -194,9 +194,9 @@ function Home() {
             label="Send payment to:"
             placeholder="choose the lucky person"
             data={
-              persons?.map(({ name }) => ({
+              persons?.map(({ name, personId }) => ({
                 value: name,
-                label: name,
+                label: personId === person.csi.personId ? `${name} (Me)` : name,
               })) || []
             }
             {...form.getInputProps("personNameToDeposit")}

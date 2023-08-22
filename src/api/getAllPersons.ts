@@ -4,7 +4,7 @@ import { baseURL } from "./constants";
 
 function getAllPersons(): Promise<Person[] | void> {
   const myHeaders = new Headers();
-  myHeaders.append("servicerId", "mambu");
+  myHeaders.append("servicerId", "csi");
   myHeaders.append("Authorization", `Bearer ${getAccessToken()}`);
 
   const requestOptions: RequestInit = {
