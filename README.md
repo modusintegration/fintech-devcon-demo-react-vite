@@ -21,7 +21,7 @@ have access to `operator`, the credentials have been hardcoded in
 this demo UI, and you can also find the credentials in the postman collection.
 
 ## Postman Collection
-Here is a collection of calls you can make to our demo api.
+Here is a collection of calls you can make to our demo api, 
 Note: You will need a CliendID and Secret to get an auth token, .
 
 ## Mambu Core API Repo
