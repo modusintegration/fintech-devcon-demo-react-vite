@@ -2,15 +2,13 @@ import { useState } from "react";
 
 import Home from "./pages/Home";
 import { Loader } from "@mantine/core";
-import getToken from "./api/getToken";
+import { useAuth } from "react-oidc-context";
 
 function App() {
+  const auth = useAuth();
   const [isLoading, setIsLoading] = useState(true);
 
-  getToken().then((token) => {
-    setIsLoading(false);
-    document.cookie = `access_token=${token}`;
-  });
+  if (!auth.isAuthenticated) auth.signinRedirect();
 
   if (isLoading) return <Loader />;
 
