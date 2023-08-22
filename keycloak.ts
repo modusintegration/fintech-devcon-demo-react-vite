@@ -5,8 +5,9 @@ const onSigninCallback = (): void => {
 };
 
 export const oidcConfig: AuthProviderProps = {
-  authority: 'fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io',
+  authority: 'https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io',
   client_id: 'fintech-devcon-demo-react-vite',
   redirect_uri: window.location.href,
+  post_logout_redirect_uri: 'https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io',
   onSigninCallback,
 };
