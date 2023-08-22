@@ -196,7 +196,8 @@ function Home() {
             data={
               persons?.map(({ name, personId }) => ({
                 value: name,
-                label: personId === person.csi.personId ? `${name} (Me)` : name,
+                label:
+                  personId === person.mambu.personId ? `${name} (Me)` : name,
               })) || []
             }
             {...form.getInputProps("personNameToDeposit")}
