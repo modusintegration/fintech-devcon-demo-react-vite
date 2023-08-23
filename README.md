@@ -20,10 +20,11 @@ For Auth we are using PortX IAM which using Keycloak. There are 2 roles configur
 have access to `operator`, the credentials have been hardcoded in
 this demo UI, and you can also find the credentials in the postman collection.
 
-## Postman Collection
+## Postman Collection for ORCA (Open Reusable Core API)
+This is a collection of calls you can make to our demo api.
+
 Note: Postman is required, download it [here](https://www.postman.com/downloads/) if needed.
 
-Here is a collection of calls you can make to our demo api,
 You can either: 
 - clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
 or
@@ -31,11 +32,11 @@ or
 and click the `Download raw file` on the right side of the screen.
 
 
-Import the postman collection, once in postman go to file import and find the collection from above.
+Import the postman collection - once in postman go to file import and find the collection from above.
 
 ![Screenshot 2023-08-22 at 9.59.50 AM.png](..%2F..%2F..%2FDesktop%2FScreenshot%202023-08-22%20at%209.59.50%20AM.png)
 
-Note: You will need a CliendID and Secret to get an auth token, .
+Note: The CliendID and Secret you need to get an auth token are already configured in the collection variables.
 
 ## Mambu Core API Repo
 Feel free to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
