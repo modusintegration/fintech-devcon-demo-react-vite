@@ -1,7 +1,6 @@
 import { Balances } from "../types/balances";
 import { getAccessToken } from "../utils/getAccessToken";
 import { baseURL } from "./constants";
-import { balances } from "./mocks";
 
 function getAccountsBalances(
   servicerId: "csi" | "mambu",
