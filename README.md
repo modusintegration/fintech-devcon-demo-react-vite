@@ -1,5 +1,3 @@
-# fintech-devcon-demo-react-vite
-
 ## Purpose
 The purpose of this session is to show how to build, deploy, and monitor an app that conencts to many Cores with an open source Stack (Apachec Cam/ArgoCD/Grafana).
 This UI is interacting with both Mambu and CSI cores.
@@ -11,7 +9,7 @@ https://workshop.dev.custom.demos.tenant-1.portx.io/portx-openbanking-docs/
 Note these are the full api specs and our demo supports `/accounts` and `/persons`
 
 ## Auth
-For Auth we are using PortX IAM which using Keycloak. There are 2 roles configured for this demo
+For Auth we are using Keycloak. There are 2 roles configured for this demo
 `admin` and `operator`. Internally we used `admin`, which is used for creating persons and accounts. Everyone will 
 have access to `operator`, the credentials have been hardcoded in
 this demo UI, and you can also find the credentials in the postman collection.
@@ -19,7 +17,7 @@ this demo UI, and you can also find the credentials in the postman collection.
 ## Postman Collection for ORCA (Open Reusable Core API)
 Note: Postman is required, download it [here](https://www.postman.com/downloads/) if needed.
 
-### Insallation
+### Installation
 
 You can either: 
 - clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
@@ -46,16 +44,16 @@ Go here to explore our Mambu core api repo https://github.com/modusintegration/m
 ## Sample "Fintech App" UI that calls ORCA for connection to Cores
 The code is in this repo in SSO branch
 
+## Deployment configuration
+- GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
+
 ### Run local with docker
 make build
 make run
 open browser and navigate to http://localhost:80
 
-## Deployment configuration
-- GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
-
 ### Run App (hosting in PortX cluster)
 https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io/
 
-### Chalenge - pitch your startup idea and get others to invest using the app!
+### Challenge - pitch your startup idea and get others to invest using the app!
 
