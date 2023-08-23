@@ -13,7 +13,7 @@ function getAllPersons(): Promise<Person[] | void> {
     redirect: "follow",
   };
 
-  return fetch(`${baseURL}/persons?townName.inc=test`, requestOptions)
+  return fetch(`${baseURL}/persons?townName.inc=Lab`, requestOptions)
     .then((response) => response.json())
     .then((result) => result)
     .catch((error) => console.log("error", error));
