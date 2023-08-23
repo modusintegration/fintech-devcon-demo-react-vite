@@ -34,7 +34,7 @@ Import the postman collection - once in postman go to file import and find the c
 
 Note: The CliendID and Secret you need to get an auth token are already configured in the collection variables.
 
-## Sample API built with Apachec Camel - Core API for Mambu
+## Sample API built with Apache Camel - Core API for Mambu
 Go here to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
 
 ## Sample "Fintech App" UI that calls ORCA for connection to Cores
