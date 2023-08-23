@@ -44,20 +44,18 @@ Click the button `Use Token`, now you should be able to make correctly configure
 Go here to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
 
 ## Sample "Fintech App" UI that calls ORCA for connection to Cores
-The code is in this repo.
+The code is in this repo in SSO branch
 
 ### Run local with docker
 make build
 make run
 open browser and navigate to http://localhost:80
 
-### Run from internet (codesandbox.io)
-https://rjflh9-5173.csb.app/
+## Deployment configuration
+- GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
 
-https://codesandbox.io/p/sandbox/fintech-devcon-demo-react-vite-76jq59?file=/src/App.tsx:1,1
-
+### Run App (hosting in PortX cluster)
+https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io/
 
 ### Chalenge - pitch your startup idea and get others to invest using the app!
 
-## Deployment configuration
-- GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
