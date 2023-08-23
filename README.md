@@ -23,19 +23,17 @@ Note: Postman is required, download it [here](https://www.postman.com/downloads/
 
 You can either: 
 - clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
+
 or
 - go [githhub/fintech-devcon-demo-react-vite](https://github.com/modusintegration/fintech-devcon-demo-react-vite/blob/main/postman/moov-lab-portx-oba-proc-api.postman_collection.json)
 and click the `Download raw file` on the right side of the screen.
 
-
 Import the postman collection - once in postman go to file import and find the collection from above.
 
-Once Imported you should see a collection like bellow, to configure auth you need to click on the collection moov-lab-portx-oba-proc-api, the Authorization tab:
+Once Imported you should see a collection like bellow, to configure auth you need to click on the collection `moov-lab-portx-oba-proc-api`, the `Authorization` tab:
 ![image (1).png](postman%2Fimage%20%281%29.png)
 ![image (2).png](postman%2Fimage%20%282%29.png)
 ![image (3).png](postman%2Fimage%20%283%29.png)
-
-Note: The CliendID and Secret you need to get an auth token are already configured in the collection variables.
 
 ## Sample API built with Apache Camel - Core API for Mambu
 Go here to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
@@ -48,8 +46,11 @@ make build
 make run
 open browser and navigate to http://localhost:80
 
-### Run from internet
+### Run from internet (codesandbox.io)
 https://rjflh9-5173.csb.app/
+
+https://codesandbox.io/p/sandbox/fintech-devcon-demo-react-vite-76jq59?file=/src/App.tsx:1,1
+
 
 ### Chalenge - pitch your startup idea and get others to invest using the app!
 
