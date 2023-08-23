@@ -43,7 +43,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{demoApp}}/1.0/persons?firstName.eq=Test&lastName.eq=Lab",
+							"raw": "{{host}}/{{demoApp}}/1.0/persons?firstName.eq=FIRSTNAME&lastName.eq=LASTNAME",
 							"host": [
 								"{{host}}"
 							],
@@ -55,11 +55,11 @@
 							"query": [
 								{
 									"key": "firstName.eq",
-									"value": "Test"
+									"value": "FIRSTNAME"
 								},
 								{
 									"key": "lastName.eq",
-									"value": "Lab"
+									"value": "LASTNAME"
 								}
 							]
 						}
@@ -74,7 +74,13 @@
 							"script": {
 								"exec": [
 									"var jsonData = JSON.parse(responseBody);",
+									"if(pm.collectionVariables.get(\"servicerId\") == \"mambu\"){",
 									"pm.collectionVariables.set(\"accountId\", jsonData.accounts[0].accountNumber);",
+									"} else {",
+									"   var a = jsonData.accounts[0].accountId;",
+									"   var accountId = a.split('-');",
+									"   pm.collectionVariables.set(\"accountId\", accountId[2]); ",
+									"}",
 									"",
 									"pm.test(\"Create accounts response http status code = 200\", function(){",
 									"    pm.response.to.have.status(200);",
@@ -91,12 +97,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "bankId",
-								"value": "{{bankId}}",
-								"type": "text",
-								"disabled": true
-							},
 							{
 								"key": "servicerId",
 								"value": "{{servicerId}}",
@@ -320,12 +320,6 @@
 						"method": "GET",
 						"header": [
 							{
-								"key": "bankId",
-								"value": "{{bankId}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
 								"key": "servicerId",
 								"value": "{{servicerId}}",
 								"type": "text"
@@ -488,329 +482,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"accountNumber\": \"SSRG580\",\n    \"accountType\": \"REGULAR_SAVINGS\",\n    \"accountOwnershipType\": \"Owner\",\n    \"productId\": \"8a44d6d97c81ddbe017ca39738446161\",\n    \"name\": \"mj1DepositSavingsAccount1\",\n    \"currency\": \"USD\",\n    \"parties\": [\n        {\n            \"partyId\": \"8a44b95f8445a0b201844fc7a4b138a0\",\n            \"partyType\": \"Person\",\n            \"partyAccountRole\": \"Owner\"\n        }\n    ],\n    \"status\": \"ACTIVE\",\n    \"statusDateAndTime\": \"2022-11-06T17:54:31-08:00\",\n    \"openDate\": \"2022-11-06\",\n    \"balances\": [\n        {\n            \"balanceName\": \"Available\",\n            \"amount\": 1100,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-06T17:54:31-08:00\"\n        },\n        {\n            \"balanceName\": \"Blocked\",\n            \"amount\": 0,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-06T17:54:31-08:00\"\n        },\n        {\n            \"balanceName\": \"Pending\",\n            \"amount\": 0,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-06T17:54:31-08:00\"\n        },\n        {\n            \"balanceName\": \"Current\",\n            \"amount\": 1100,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-06T17:54:31-08:00\"\n        }\n    ],\n    \"accountId\": \"8a44b95f8445a0b201844fcbde9338ae\"\n}"
-						},
-						{
-							"name": "Get Account - Corelation example reponse",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text"
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/accounts/{{accountId}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"accounts",
-										"{{accountId}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Thu, 10 Nov 2022 05:53:07 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "accept",
-									"value": "*/*"
-								},
-								{
-									"key": "accept-encoding",
-									"value": "gzip, deflate, br"
-								},
-								{
-									"key": "accountid",
-									"value": "491069-569187"
-								},
-								{
-									"key": "authorization",
-									"value": "Bearer xT5kBAcQjnPt7Oo7X6mUlFF32hH-gNbOOubuinyzQqc._1QOTH_BXa9QX4n5NL9zc67nuNcxRNKA_92YxlexhuQ"
-								},
-								{
-									"key": "bankid",
-									"value": "corelation"
-								},
-								{
-									"key": "cookie",
-									"value": "AWSALB=+Cnae1ETZY41aaRZhC3uLfD5aR9iCRRz07MNZdpZE3FI8rGPk7BDGb0yTaF5uYTbgYJJNut8LQ+cfUBHYmfxcUZobvGQVrHf+lbK414pV1IOL9tonTTcKJDQE7nV; AWSALBCORS=+Cnae1ETZY41aaRZhC3uLfD5aR9iCRRz07MNZdpZE3FI8rGPk7BDGb0yTaF5uYTbgYJJNut8LQ+cfUBHYmfxcUZobvGQVrHf+lbK414pV1IOL9tonTTcKJDQE7nV"
-								},
-								{
-									"key": "postman-token",
-									"value": "770dd810-5d27-4ee7-a99c-dd58df11705b"
-								},
-								{
-									"key": "server",
-									"value": "envoy"
-								},
-								{
-									"key": "servicerid",
-									"value": "corelation"
-								},
-								{
-									"key": "x-amzn-trace-id",
-									"value": "Self=1-636c91c3-609edf9d0b5935d421026ee8;Root=1-636c91c3-16708edf21cc8663595d8587"
-								},
-								{
-									"key": "x-envoy-expected-rq-timeout-ms",
-									"value": "10000"
-								},
-								{
-									"key": "x-envoy-external-address",
-									"value": "192.168.142.128"
-								},
-								{
-									"key": "x-envoy-original-path",
-									"value": "/corelation-portx-cbs-connector/corelation-portx-cbs-connector/1.0/accounts/491069-569187"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "177"
-								},
-								{
-									"key": "x-forwarded-for",
-									"value": "54.70.29.237,192.168.142.128"
-								},
-								{
-									"key": "x-forwarded-port",
-									"value": "443"
-								},
-								{
-									"key": "x-forwarded-proto",
-									"value": "https"
-								},
-								{
-									"key": "x-powered-by",
-									"value": "ARR/3.0"
-								},
-								{
-									"key": "x-request-id",
-									"value": "c2133d3b-7406-497f-b863-d15210b16243"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"accountNumber\": \"0002437325\",\n    \"accountType\": \"31\",\n    \"accountOwnershipType\": \"Owner\",\n    \"productId\": \"0849\",\n    \"name\": \"mj1DepositSavingsAccount1\",\n    \"currency\": \"USD\",\n    \"parties\": [\n        {\n            \"partyId\": \"573506\",\n            \"partyType\": \"Person\",\n            \"partyAccountRole\": \"Owner\"\n        }\n    ],\n    \"status\": \"ACTIVE\",\n    \"statusDateAndTime\": \"2022-11-10T05:53:07Z\",\n    \"openDate\": \"2022-11-10\",\n    \"balances\": [\n        {\n            \"balanceName\": \"Available\",\n            \"amount\": \"65.00\",\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-10T05:53:07Z\"\n        },\n        {\n            \"balanceName\": \"Blocked\",\n            \"amount\": 0,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-10T05:53:07Z\"\n        },\n        {\n            \"balanceName\": \"Pending\",\n            \"amount\": 0,\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-10T05:53:07Z\"\n        },\n        {\n            \"balanceName\": \"Current\",\n            \"amount\": \"65.00\",\n            \"currency\": \"USD\",\n            \"calculationDate\": \"2022-11-10T05:53:07Z\"\n        }\n    ],\n    \"accountId\": \"491069-569187\"\n}"
-						},
-						{
-							"name": "Get Account Copy",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/accounts/{{accountNumber}}",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"accounts",
-										"{{accountNumber}}"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Thu, 17 Aug 2023 18:03:30 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "accept",
-									"value": "*/*"
-								},
-								{
-									"key": "accept-encoding",
-									"value": "gzip, deflate, br"
-								},
-								{
-									"key": "accountid",
-									"value": "110016302"
-								},
-								{
-									"key": "api-subscription-key",
-									"value": "6e210e7af7d04d7585eeee8d1615d0ec"
-								},
-								{
-									"key": "authorization",
-									"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjY5NjBCMDVDQjBBN0VCNTVCNTBCQUFDQjQ5MTAwOUMyQkUxNDkwNkRSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6ImFXQ3dYTENuNjFXMUM2ckxTUkFKd3I0VWtHMCJ9.eyJuYmYiOjE2OTIyOTU0MDksImV4cCI6MTY5MjI5OTAwOSwiaXNzIjoiaHR0cHM6Ly90ZXN0aWRlbnRpdHkuY3Npd2ViLmNvbSIsImF1ZCI6WyJicmlkZ2VfYWNjb3VudFZhbGlkYXRpb24iLCJicmlkZ2VfaGVscCIsImJyaWRnZV9jaWYiLCJicmlkZ2VfZGRhIiwiZGlnaXRhbF9kZGEiLCJkaWdpdGFsX3VzZXJzIl0sImNsaWVudF9pZCI6IjE3YzJiMWZkLTc1MzUtNDk2Yy04MjdlLTI0ZjVhMTM3NDk2OSIsImluc3RpdHV0aW9uIjoiNjIwIiwiaG9zdF9jbGllbnRfaWQiOiJXRCIsImRiX2JyYW5kX2lkIjoiMSIsInZlbmRvciI6Ik1vZHVzQm94L0RvY0ZveCIsImlhdCI6MTY5MjI5NTQwOSwic2NvcGUiOlsiYXZfYXZhaWxhYmxlIiwiYXZfbmV3IiwiYnJpZGdlX2hlbHAiLCJjaWZfY3JlYXRlIiwiY2lmX3JlYWQiLCJjaWZfd3JpdGUiLCJkZGFfcmVhZCIsImRkYV90cmFuc2FjdGlvbl93cml0ZSIsImRkYV93cml0ZSIsImRpZ2l0YWxfZGRhIiwiZGlnaXRhbF91c2VycyJdfQ.Ghr8t-EQBIFApD1sZriZgga93AvBgDB7E07G72f4xJ8JRptnhOBPxfwvCnLdebBo7C0p2W4GDI341yU4whf4-1I9d1GkOpPV4Q14tNLpE3t9utgyT2FeDzsLZH477PUaF2rOgFyfHXwbCIgP2uGrfTn3vqoGu23mmxEqrxrpL72PxXVHOg26khVQkKEpY6tjQBeplHM2pChj6lnSRZTlDA1oL7d6mkU6Pbj1TM5GK7f2kR1_0pHybB8bTPweK11dGW0CT6nroVGMBA7J_uyhuwXAfcn2gcot4IvzCoa-Srh2L6s2L78TbTsXreelYIr-Fe9tsWqEeR9H1hBfHp4RYQ"
-								},
-								{
-									"key": "cookie",
-									"value": "BIGipServer~DEV~TEST_IDENTITY_POOL=456173760.20480.0000; testbridgecsiwebcom=!60Qcree34+A1hc02Gqu7N9jnFky3li6Z3JZXS46rXhPT3YIqHsJQXBCIcFPFlkrsNQ3tzeKXy461GUuMmgZFieRvWx6in46T/zD6+9Zk; testidentitycsiwebcom=!jVfpsbQLGuUJM0o2Gqu7N9jnFky3lhwbBsNCZR7P0vq+0mwyeLfY0qFlV49AUVXGhDU7F2Z/sdwGFyY7pbpPnaJsodtOY18SLsI5bLef"
-								},
-								{
-									"key": "postman-token",
-									"value": "f6e9477a-6eae-44d1-a3b0-af422e0af9cd"
-								},
-								{
-									"key": "request-context",
-									"value": "appId=cid-v1:0a136a3d-c530-44a0-a791-c5ca0cc670ca"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "server-timing",
-									"value": "cdn-cache; desc=MISS"
-								},
-								{
-									"key": "server-timing",
-									"value": "edge; dur=67"
-								},
-								{
-									"key": "server-timing",
-									"value": "origin; dur=231"
-								},
-								{
-									"key": "server-timing",
-									"value": "ak_p; desc=\"1692295409064_388125511_312642684_29744_6744_37_0_-\";dur=1"
-								},
-								{
-									"key": "servicerid",
-									"value": "csi"
-								},
-								{
-									"key": "set-cookie",
-									"value": "testbridgecsiwebcom=!I2MQ5y2+wZEu34I2Gqu7N9jnFky3lnrDoz+8S17SvGVduU0cdLEOeuKWMreITcp+y6+DWuwFjMAjLv0CXimzZJsLskoCHRfToRO2hh1X; path=/; Httponly; Secure"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=16070400; includeSubDomains"
-								},
-								{
-									"key": "vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "x-amzn-trace-id",
-									"value": "Root=1-64de60f0-0635716a1856c7d01e377cb1"
-								},
-								{
-									"key": "x-b3-parentspanid",
-									"value": "00d0fb464d218f28"
-								},
-								{
-									"key": "x-b3-sampled",
-									"value": "0"
-								},
-								{
-									"key": "x-b3-spanid",
-									"value": "472230371f3520cf"
-								},
-								{
-									"key": "x-b3-traceid",
-									"value": "33177306bcd5bd8b00d0fb464d218f28"
-								},
-								{
-									"key": "x-content-type-options",
-									"value": "nosniff"
-								},
-								{
-									"key": "x-csi-node",
-									"value": "P45UWS14"
-								},
-								{
-									"key": "x-envoy-attempt-count",
-									"value": "1"
-								},
-								{
-									"key": "x-envoy-external-address",
-									"value": "10.0.0.192"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "1800"
-								},
-								{
-									"key": "x-forwarded-client-cert",
-									"value": "By=spiffe://cluster.local/ns/oba/sa/default;Hash=c08b91cb3a7f9c8df8668b7801246b7f2cdb2f20a842a8836319e8489ecdf7a4;Subject=\"\";URI=spiffe://cluster.local/ns/istio-system/sa/public-istio-ingressgateway"
-								},
-								{
-									"key": "x-forwarded-port",
-									"value": "443"
-								},
-								{
-									"key": "x-forwarded-proto",
-									"value": "https"
-								},
-								{
-									"key": "x-frame-options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "x-logid",
-									"value": "9502632"
-								},
-								{
-									"key": "x-powered-by",
-									"value": "ASP.NET"
-								},
-								{
-									"key": "x-request-id",
-									"value": "4bb56f0c-8d82-4847-b440-b8ec3ef46dd6"
-								},
-								{
-									"key": "x-xss-protection",
-									"value": "1; mode=block"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"accountNumber\": \"110016302\",\n    \"accountId\": \"DDA\",\n    \"balances\": [\n        {\n            \"balanceName\": \"Available\",\n            \"amount\": \"0\"\n        },\n        {\n            \"balanceName\": \"Memo\",\n            \"amount\": \"0\"\n        },\n        {\n            \"balanceName\": \"Current\",\n            \"amount\": \"0\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -838,12 +509,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "bankId",
-								"value": "{{bankId}}",
-								"type": "text",
-								"disabled": true
-							},
 							{
 								"key": "servicerId",
 								"value": "{{servicerId}}",
@@ -1040,12 +705,6 @@
 								"disabled": true
 							},
 							{
-								"key": "bankId",
-								"value": "{{bankId}}",
-								"type": "text",
-								"disabled": true
-							},
-							{
 								"key": "servicerId",
 								"value": "{{servicerId}}",
 								"type": "text"
@@ -1219,212 +878,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"transactionId\": \"4778066303\",\n    \"amount\": 25,\n    \"creditDebitIndicator\": \"Credit\",\n    \"bankTransactionDomain\": \"AccountManagement\",\n    \"bankTransactionFamily\": \"DEPOSIT\",\n    \"status\": \"Booked\",\n    \"reversalIndicator\": false,\n    \"creationDate\": \"2022-11-10T00:52:22Z\",\n    \"bookingDate\": \"2022-11-10T00:52:22Z\",\n    \"charges\": 0,\n    \"interest\": 0,\n    \"currentBalance\": 75\n}"
-						},
-						{
-							"name": "Perform Deposit Copy",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.mambu.v2+json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"transactionType\": \"CASH\",\n  \"amount\": \"5.00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/accounts/{{accountNumber}}/deposits",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"accounts",
-										"{{accountNumber}}",
-										"deposits"
-									]
-								}
-							},
-							"status": "Accepted",
-							"code": 202,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Thu, 17 Aug 2023 18:08:55 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "accept",
-									"value": "*/*"
-								},
-								{
-									"key": "accept-encoding",
-									"value": "gzip, deflate, br"
-								},
-								{
-									"key": "accountid",
-									"value": "110016302"
-								},
-								{
-									"key": "authorization",
-									"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3MkNVQzhSQjFuYTlEUGN3S3pyWVFVV2JYTktrXzBpWDRNX3JBMDBRcjZrIn0.eyJleHAiOjE2OTIzMDI5MzMsImlhdCI6MTY5MjI5NTczMywianRpIjoiOGEwMjY5MGItNDYyMC00MDhjLWE5NWQtODEzMTQwNWM5MjNjIiwiaXNzIjoiaHR0cHM6Ly9rZXljbG9hay5kZXYucHJlLnBpYW0ucHNwcy50ZW5hbnRzLnBvcnR4LmlvL3JlYWxtcy9rZXZpbi10ZXN0MiIsImF1ZCI6ImtldmluLXRlc3QyLXdpcmVzLWFwaTpkZXYiLCJzdWIiOiI2NWFjODc3Yi0xODg1LTQ2MDEtOTFlYi02ZGY5MDM2ZTYxNDAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ3aXJlcy1jbGllbnQ6ZGV2Iiwic2NvcGUiOiIiLCJjbGllbnRIb3N0IjoiMzQuMjEwLjEzMC4yNiIsImNsaWVudElkIjoid2lyZXMtY2xpZW50OmRldiIsInJvbGVzIjpbImFkbWluIl0sImNsaWVudEFkZHJlc3MiOiIzNC4yMTAuMTMwLjI2In0.Yx84AHLJzerY4NfP7SFei7BkP50kE5EOGNO5ZD7Y_LroRd9Sz9GV1LKilKnUzZCo3ryQ7RrqNlZbov3Ug7E0lc0H1ohTF87Vj-aWG5TrVtLH8fQ6I_ISQYQeZWmTrjGJ7beOYPhIn9uZ_4oN0K8G13q9A7-6-UG8x1IdFw2Opzk3GmljDE0ExmMW3aNDI0Q-Fa95cYacj5okjxLLLqsqd8tQ2gDH90apbEctY5T23YPdSOsnx4qZXyf98-hWcPp0jCcs616FITys-UTgvWs8wV0utC6djV8vkC4v4KYVkBuvMvYS1tZkJubJI8i97PzzY4k7ceQZ0Modix6ZnnhGmA"
-								},
-								{
-									"key": "cookie",
-									"value": "BIGipServer~DEV~TEST_IDENTITY_POOL=456173760.20480.0000; testbridgecsiwebcom=!I2MQ5y2+wZEu34I2Gqu7N9jnFky3lnrDoz+8S17SvGVduU0cdLEOeuKWMreITcp+y6+DWuwFjMAjLv0CXimzZJsLskoCHRfToRO2hh1X; testidentitycsiwebcom=!jVfpsbQLGuUJM0o2Gqu7N9jnFky3lhwbBsNCZR7P0vq+0mwyeLfY0qFlV49AUVXGhDU7F2Z/sdwGFyY7pbpPnaJsodtOY18SLsI5bLef"
-								},
-								{
-									"key": "postman-token",
-									"value": "311bc8f8-bbdc-4863-b524-7eb6d3d51b4a"
-								},
-								{
-									"key": "request-context",
-									"value": "appId=cid-v1:0a136a3d-c530-44a0-a791-c5ca0cc670ca"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "server-timing",
-									"value": "cdn-cache; desc=MISS"
-								},
-								{
-									"key": "server-timing",
-									"value": "edge; dur=44"
-								},
-								{
-									"key": "server-timing",
-									"value": "origin; dur=220"
-								},
-								{
-									"key": "server-timing",
-									"value": "ak_p; desc=\"1692295733920_388125511_312706169_26337_7782_33_0_-\";dur=1"
-								},
-								{
-									"key": "servicerid",
-									"value": "csi"
-								},
-								{
-									"key": "set-cookie",
-									"value": "testbridgecsiwebcom=!AU5xo4kkO6D+kUg2Gqu7N9jnFky3lk6Ab5ZZSMcTUZIyPeVrJzmM7iKVMuJt7SmK92uErppSK7zhBBE10JFtxc2YIfPeIR5nzIYTNKBq; path=/; Httponly; Secure"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=16070400; includeSubDomains"
-								},
-								{
-									"key": "vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "x-amzn-trace-id",
-									"value": "Root=1-64de6235-6effaa7a27eb35cd06b94dc8"
-								},
-								{
-									"key": "x-b3-parentspanid",
-									"value": "dc2f353ff6b2af9b"
-								},
-								{
-									"key": "x-b3-sampled",
-									"value": "0"
-								},
-								{
-									"key": "x-b3-spanid",
-									"value": "ad91f10df77af699"
-								},
-								{
-									"key": "x-b3-traceid",
-									"value": "41ada3e61912b526dc2f353ff6b2af9b"
-								},
-								{
-									"key": "x-content-type-options",
-									"value": "nosniff"
-								},
-								{
-									"key": "x-csi-node",
-									"value": "P45UWS13"
-								},
-								{
-									"key": "x-envoy-attempt-count",
-									"value": "1"
-								},
-								{
-									"key": "x-envoy-external-address",
-									"value": "10.0.0.49"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "1877"
-								},
-								{
-									"key": "x-forwarded-client-cert",
-									"value": "By=spiffe://cluster.local/ns/oba/sa/default;Hash=c08b91cb3a7f9c8df8668b7801246b7f2cdb2f20a842a8836319e8489ecdf7a4;Subject=\"\";URI=spiffe://cluster.local/ns/istio-system/sa/public-istio-ingressgateway"
-								},
-								{
-									"key": "x-forwarded-port",
-									"value": "443"
-								},
-								{
-									"key": "x-forwarded-proto",
-									"value": "https"
-								},
-								{
-									"key": "x-frame-options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "x-logid",
-									"value": "9502658"
-								},
-								{
-									"key": "x-powered-by",
-									"value": "ASP.NET"
-								},
-								{
-									"key": "x-request-id",
-									"value": "4de03bd1-f954-487f-aac6-6713b0debddc"
-								},
-								{
-									"key": "x-xss-protection",
-									"value": "1; mode=block"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"transactionId\": \"13623\",\n    \"transactionType\": \"CASH\",\n    \"amount\": \"5.00\"\n}"
 						}
 					]
 				},
@@ -1452,12 +905,6 @@
 							{
 								"key": "Accept",
 								"value": "application/vnd.mambu.v2+json",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "bankId",
-								"value": "{{bankId}}",
 								"type": "text",
 								"disabled": true
 							},
@@ -1635,84 +1082,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"transactionId\": \"4778066387\",\n    \"amount\": -10,\n    \"creditDebitIndicator\": \"Debit\",\n    \"bankTransactionDomain\": \"AccountManagement\",\n    \"bankTransactionFamily\": \"WITHDRAWAL\",\n    \"status\": \"Booked\",\n    \"reversalIndicator\": false,\n    \"creationDate\": \"2022-11-10T00:52:44Z\",\n    \"bookingDate\": \"2022-11-10T00:52:44Z\",\n    \"charges\": 0,\n    \"interest\": 0,\n    \"currentBalance\": 65\n}"
-						},
-						{
-							"name": "Create withdrawal - 503",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.mambu.v2+json",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"amount\": \"3.00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/accounts/{{accountId}}/withdrawals",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"accounts",
-										"{{accountId}}",
-										"withdrawals"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "plain",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Tue, 15 Nov 2022 16:02:53 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "text/plain;charset=ISO-8859-1"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "1103"
-								},
-								{
-									"key": "server",
-									"value": "envoy"
-								}
-							],
-							"cookie": [],
-							"body": "org.apache.camel.http.base.HttpOperationFailedException: HTTP operation failed invoking https://demos.dev.custom.docfox.tenant-1.portx.io/corelation-portx-cbs-connector/corelation-portx-cbs-connector/1.0/accounts/491206-569304/withdrawals with statusCode: 503\n\tat org.apache.camel.component.http.HttpProducer.populateHttpOperationFailedException(HttpProducer.java:422)\n\tat org.apache.camel.component.http.HttpProducer.process(HttpProducer.java:294)\n\tat org.apache.camel.support.AsyncProcessorConverterHelper$ProcessorToAsyncProcessorBridge.process(AsyncProcessorConverterHelper.java:66)\n\tat org.apache.camel.processor.SendDynamicProcessor.lambda$process$0(SendDynamicProcessor.java:197)\n\tat org.apache.camel.support.cache.DefaultProducerCache.doInAsyncProducer(DefaultProducerCache.java:327)\n\tat org.apache.camel.processor.SendDynamicProcessor.process(SendDynamicProcessor.java:182)\n\tat org.apache.camel.processor.errorhandler.RedeliveryErrorHandler$SimpleTask.run(RedeliveryErrorHandler.java:471)\n\tat org.apache.camel.impl.engine.DefaultReactiveExecutor$Worker.schedule(DefaultReactiveExecutor.java:189)\n\tat org.apache.camel.impl.engine.DefaultReactiveExecutor.scheduleMain(DefaultReactiveExecutor.java:61)\n\tat org.apache.camel.processor.Pipeline.process(Pipeline.java:184)\n\tat org.apache.camel.impl.engine.CamelInternalProcessor.process(CamelInternalProcessor.java:399)\n\tat org.apache.camel.impl.engine.DefaultAsyncProcessorAwaitManager.process(DefaultAsyncProcessorAwaitManager.java:83)\n\tat org.apache.camel.support.AsyncProcessorSupport.process(AsyncProcessorSupport.java:41)\n\tat org.apache.camel.http.common.CamelServlet.doExecute(CamelServlet.java:319)\n\tat org.apache.camel.http.common.CamelServlet.doService(CamelServlet.java:214)\n\tat org.apache.camel.http.common.CamelServlet.service(CamelServlet.java:130)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:584)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\n\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\n\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\n\tat org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:96)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\n\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)\n\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117)\n\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)\n\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)\n\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)\n\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)\n\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)\n\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)\n\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)\n\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)\n\tat org.apache.catalina.valves.RemoteIpValve.invoke(RemoteIpValve.java:769)\n\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360)\n\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399)\n\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)\n\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)\n\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1787)\n\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)\n\tat org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)\n\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)\n\tat java.base/java.lang.Thread.run(Thread.java:834)\n"
 						}
 					]
 				},
@@ -1741,12 +1110,6 @@
 					"request": {
 						"method": "GET",
 						"header": [
-							{
-								"key": "bankId",
-								"value": "{{bankId}}",
-								"type": "text",
-								"disabled": true
-							},
 							{
 								"key": "servicerId",
 								"value": "{{servicerId}}",
@@ -2271,7 +1634,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/{{demoApp}}/1.0/persons?townName.inc=Cary",
+							"raw": "{{host}}/{{demoApp}}/1.0/persons?townName.inc=Lab",
 							"host": [
 								"{{host}}"
 							],
@@ -2283,7 +1646,7 @@
 							"query": [
 								{
 									"key": "townName.inc",
-									"value": "Cary"
+									"value": "Lab"
 								}
 							]
 						}
@@ -2291,7 +1654,7 @@
 					"response": []
 				},
 				{
-					"name": "Unauthorized - Create Person",
+					"name": "403 FORBIDDEN - Create Person",
 					"event": [
 						{
 							"listen": "test",
@@ -2354,280 +1717,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "Create Person - CSI example response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"relatedParties\": [\n    {\n      \"partyId\": \"5fb9d4d6-1a3c-11ed-861d-0242ac120002\",\n      \"partyType\": \"Person\",\n      \"partyRelationType\": \"Owner\"\n    }\n  ],\n  \"postalAddresses\": [\n    {\n      \"townName\": \"Apex\",\n      \"addressLine\": [\n        \"{{$randomStreetAddress}}\"\n      ]\n    }\n  ],\n  \"taxInformation\": {\n    \"tIN\": \"588211615\",\n    \"taxIdType\": \"SSN\",\n    \"tINStatus\": \"Valid\"\n  },\n  \"placeAndDateOfBirth\": {\n    \"birthDate\": \"2002-04-17\"\n  },\n  \"contact\": {\n    \"phones\": [\n      {\n        \"number\": \"+1-{{$randomPhoneNumber}}\",\n        \"phoneType\": \"cell\"\n      }\n    ],\n    \"emails\": [\n      {\n        \"emailAddress\": \"{{$randomExampleEmail}}\"\n      }\n    ]\n  },\n  \"civilStatus\": \"Single\",\n  \"structuredName\": {\n    \"firstName\": \"Kent\",\n    \"lastName\": \"Lab\"\n  },\n  \"gender\": \"Female\",\n  \"jobTitle\": \"{{$randomJobTitle}}\",\n  \"countryOfResidence\": \"US\",\n  \"profile\": {\n    \"riskLevel\": \"Permanent\",\n    \"salaryRange\": {\n      \"minAmount\": \"100\",\n      \"maxAmount\": \"100\"\n    }\n  }  \n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/persons",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"persons"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Mon, 21 Aug 2023 20:15:45 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json;charset=utf-8"
-								},
-								{
-									"key": "Request-Context",
-									"value": "appId=cid-v1:0a136a3d-c530-44a0-a791-c5ca0cc670ca"
-								},
-								{
-									"key": "Set-Cookie",
-									"value": "testbridgecsiwebcom=!seMy3dp+1XisF4A2Gqu7N9jnFky3lmm3HvUU/BkrVNShJi2oCDjNzHV0Sn8r4vywrilnw8kqZv7xGp9rYHxLspNOA5IuW9qphqMVfZMG; path=/; Httponly; Secure"
-								},
-								{
-									"key": "Strict-Transport-Security",
-									"value": "max-age=16070400; includeSubDomains"
-								},
-								{
-									"key": "Vary",
-									"value": "Accept-Encoding"
-								},
-								{
-									"key": "X-Content-Type-Options",
-									"value": "nosniff"
-								},
-								{
-									"key": "X-CSI-NODE",
-									"value": "P45UWS14"
-								},
-								{
-									"key": "X-Frame-Options",
-									"value": "SAMEORIGIN"
-								},
-								{
-									"key": "X-LogID",
-									"value": "9525327"
-								},
-								{
-									"key": "X-Powered-By",
-									"value": "ASP.NET"
-								},
-								{
-									"key": "X-XSS-Protection",
-									"value": "1; mode=block"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"personId\": \"84413200-405f-11ee-8001-246e96b7403c\",\n    \"relatedParties\": [\n        {\n            \"partyId\": \"5fb9d4d6-1a3c-11ed-861d-0242ac120002\",\n            \"partyType\": \"Person\",\n            \"partyRelationType\": \"Owner\"\n        }\n    ],\n    \"postalAddresses\": [\n        {\n            \"townName\": \"Apex\",\n            \"addressLine\": [\n                \"04369 Schneider Field\"\n            ]\n        }\n    ],\n    \"taxInformation\": {\n        \"tIN\": \"588211615\",\n        \"taxIdType\": \"SSN\",\n        \"tINStatus\": \"Valid\"\n    },\n    \"placeAndDateOfBirth\": {\n        \"birthDate\": \"2002-04-17\"\n    },\n    \"contact\": {\n        \"phones\": [\n            {\n                \"number\": \"+1-994-777-7983\",\n                \"phoneType\": \"cell\"\n            }\n        ],\n        \"emails\": [\n            {\n                \"emailAddress\": \"Celestino.Streich@example.org\"\n            }\n        ]\n    },\n    \"civilStatus\": \"Single\",\n    \"structuredName\": {\n        \"firstName\": \"Kent\",\n        \"lastName\": \"Lab\"\n    },\n    \"gender\": \"Female\",\n    \"jobTitle\": \"Lead Configuration Architect\",\n    \"countryOfResidence\": \"US\",\n    \"profile\": {\n        \"riskLevel\": \"Permanent\",\n        \"salaryRange\": {\n            \"minAmount\": \"100\",\n            \"maxAmount\": \"100\"\n        }\n    }\n}"
-						},
-						{
-							"name": "Create Person - Mambu example response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "bankId",
-										"value": "{{bankId}}",
-										"type": "text",
-										"disabled": true
-									},
-									{
-										"key": "servicerId",
-										"value": "{{servicerId}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"relatedParties\": [\n    {\n      \"partyId\": \"5fb9d4d6-1a3c-11ed-861d-0242ac120002\",\n      \"partyType\": \"Person\",\n      \"partyRelationType\": \"Owner\"\n    }\n  ],\n  \"postalAddresses\": [\n    {\n      \"townName\": \"Apex\",\n      \"addressLine\": [\n        \"{{$randomStreetAddress}}\"\n      ]\n    }\n  ],\n  \"taxInformation\": {\n    \"tIN\": \"588211615\",\n    \"taxIdType\": \"SSN\",\n    \"tINStatus\": \"Valid\"\n  },\n  \"placeAndDateOfBirth\": {\n    \"birthDate\": \"2002-04-17\"\n  },\n  \"contact\": {\n    \"phones\": [\n      {\n        \"number\": \"+1-{{$randomPhoneNumber}}\",\n        \"phoneType\": \"cell\"\n      }\n    ],\n    \"emails\": [\n      {\n        \"emailAddress\": \"{{$randomExampleEmail}}\"\n      }\n    ]\n  },\n  \"civilStatus\": \"Single\",\n  \"structuredName\": {\n    \"firstName\": \"Kent\",\n    \"lastName\": \"Lab\"\n  },\n  \"gender\": \"Female\",\n  \"jobTitle\": \"{{$randomJobTitle}}\",\n  \"countryOfResidence\": \"US\",\n  \"profile\": {\n    \"riskLevel\": \"Permanent\",\n    \"salaryRange\": {\n      \"minAmount\": \"100\",\n      \"maxAmount\": \"100\"\n    }\n  }  \n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{host}}/{{demoApp}}/1.0/persons",
-									"host": [
-										"{{host}}"
-									],
-									"path": [
-										"{{demoApp}}",
-										"1.0",
-										"persons"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Date",
-									"value": "Mon, 21 Aug 2023 20:19:20 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/vnd.mambu.v2+json"
-								},
-								{
-									"key": "Transfer-Encoding",
-									"value": "chunked"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "accept",
-									"value": "application/vnd.mambu.v2+json"
-								},
-								{
-									"key": "accept-encoding",
-									"value": "gzip, deflate, br"
-								},
-								{
-									"key": "authorization",
-									"value": "Basic c2hhc2hpOk1vZHVzYm94QDEyMw=="
-								},
-								{
-									"key": "content-security-policy",
-									"value": "object-src 'none'; upgrade-insecure-requests;"
-								},
-								{
-									"key": "cookie",
-									"value": "testbridgecsiwebcom=!R0nPe5SHGVCeX102Gqu7N9jnFky3loDzAI2dVTEmhdNyTOKTNqxBGsJIldr4WZUqmmjmq5LAcrsw0drIALffk8Z4RM9dbchu2gBPpF+H"
-								},
-								{
-									"key": "feature-policy",
-									"value": "oversized-images 'none'; unsized-media 'none';"
-								},
-								{
-									"key": "postman-token",
-									"value": "01ce78d6-b5c8-4223-8751-69ce60950ced"
-								},
-								{
-									"key": "referrer-policy",
-									"value": "no-referrer"
-								},
-								{
-									"key": "server",
-									"value": "istio-envoy"
-								},
-								{
-									"key": "servicerid",
-									"value": "mambu"
-								},
-								{
-									"key": "session-id",
-									"value": "no-session-id"
-								},
-								{
-									"key": "strict-transport-security",
-									"value": "max-age=63072001; includeSubDomains; preload"
-								},
-								{
-									"key": "traceparent",
-									"value": "00-408df0b05b30edb7e4ce01931470f4c0-5764fbedb4113d14-01"
-								},
-								{
-									"key": "x-amzn-trace-id",
-									"value": "Self=1-64e3c6c8-66a0c87d186ec1ac73e1d393;Root=1-64e3c6c8-153d1bce239cfcaa37db5ff3"
-								},
-								{
-									"key": "x-b3-parentspanid",
-									"value": "36f31cd148d6637b"
-								},
-								{
-									"key": "x-b3-sampled",
-									"value": "0"
-								},
-								{
-									"key": "x-b3-spanid",
-									"value": "5d184ca10d5bbe51"
-								},
-								{
-									"key": "x-b3-traceid",
-									"value": "a10e5a486312fac86ade3e596c62c054"
-								},
-								{
-									"key": "x-content-type-options",
-									"value": "nosniff"
-								},
-								{
-									"key": "x-envoy-attempt-count",
-									"value": "1"
-								},
-								{
-									"key": "x-envoy-external-address",
-									"value": "10.0.7.124"
-								},
-								{
-									"key": "x-envoy-upstream-service-time",
-									"value": "458"
-								},
-								{
-									"key": "x-forwarded-client-cert",
-									"value": "By=spiffe://cluster.local/ns/oba/sa/default;Hash=5cca4de96fb82cd662e5b4c0b1fed0462706339db1cb4581bc1205b23a3c771e;Subject=\"\";URI=spiffe://cluster.local/ns/istio-system/sa/public-istio-ingressgateway"
-								},
-								{
-									"key": "x-forwarded-for",
-									"value": "35.160.91.101,10.0.7.124"
-								},
-								{
-									"key": "x-forwarded-port",
-									"value": "443"
-								},
-								{
-									"key": "x-forwarded-proto",
-									"value": "https"
-								},
-								{
-									"key": "x-request-id",
-									"value": "83f3fd8d-8e06-4103-a04a-4f65f884f484"
-								},
-								{
-									"key": "x-xss-protection",
-									"value": "1"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"personId\": \"8a44d69b8a183c32018a192d79455ab8\",\n    \"identifiers\": [\n        {\n            \"number\": \"758451417\",\n            \"schemeName\": \"clientId\",\n            \"issuer\": \"Mambu\"\n        },\n        {\n            \"number\": \"588211615\",\n            \"schemeName\": \"SSN\"\n        }\n    ],\n    \"name\": \"Kent Lab\",\n    \"shortName\": \"Kent Lab\",\n    \"relatedParties\": [\n        {\n            \"partyId\": \"8a44d69b8a183c32018a192d79455ab8\",\n            \"partyType\": \"Person\",\n            \"partyRelationType\": \"Owner\"\n        }\n    ],\n    \"postalAddresses\": [\n        {\n            \"townName\": \"Apex\",\n            \"addressLine\": [\n                \"8858 Romaguera Avenue\"\n            ]\n        }\n    ],\n    \"status\": \"INACTIVE\",\n    \"placeAndDateOfBirth\": {\n        \"birthDate\": \"2002-04-17\"\n    },\n    \"contact\": {\n        \"emailAddress\": \"Delilah.Barton@example.com\"\n    },\n    \"structuredName\": {\n        \"firstName\": \"Kent\",\n        \"lastName\": \"Lab\"\n    },\n    \"gender\": \"FEMALE\",\n    \"audit\": {\n        \"status\": \"INACTIVE\",\n        \"creationDate\": \"2023-08-21T13:19:20-07:00\",\n        \"lastModificationDate\": \"2023-08-21T13:19:20-07:00\"\n    }\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "lab oauth2 token endpoint",
@@ -2766,66 +1856,6 @@
 					]
 				}
 			],
-			"auth": {
-				"type": "oauth2",
-				"oauth2": [
-					{
-						"key": "client_authentication",
-						"value": "body",
-						"type": "string"
-					},
-					{
-						"key": "scope",
-						"value": "{{scope}}",
-						"type": "string"
-					},
-					{
-						"key": "clientId",
-						"value": "{{clientId}}",
-						"type": "string"
-					},
-					{
-						"key": "clientSecret",
-						"value": "{{clientSecret}}",
-						"type": "string"
-					},
-					{
-						"key": "accessTokenUrl",
-						"value": "{{accessTokenUrl}}",
-						"type": "string"
-					},
-					{
-						"key": "refreshRequestParams",
-						"value": [],
-						"type": "any"
-					},
-					{
-						"key": "tokenRequestParams",
-						"value": [],
-						"type": "any"
-					},
-					{
-						"key": "authRequestParams",
-						"value": [],
-						"type": "any"
-					},
-					{
-						"key": "challengeAlgorithm",
-						"value": "S256",
-						"type": "string"
-					},
-					{
-						"key": "grant_type",
-						"value": "client_credentials",
-						"type": "string"
-					},
-					{
-						"key": "addTokenTo",
-						"value": "header",
-						"type": "string"
-					}
-				]
-			},
 			"event": [
 				{
 					"listen": "prerequest",

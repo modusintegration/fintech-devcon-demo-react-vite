@@ -30,7 +30,10 @@ and click the `Download raw file` on the right side of the screen.
 
 Import the postman collection - once in postman go to file import and find the collection from above.
 
-![Screenshot 2023-08-22 at 9.59.50 AM.png](..%2F..%2F..%2FDesktop%2FScreenshot%202023-08-22%20at%209.59.50%20AM.png)
+Once Imported you should see a collection like bellow, to configure auth you need to click on the collection moov-lab-portx-oba-proc-api, the Authorization tab:
+![image (1).png](postman%2Fimage%20%281%29.png)
+![image (2).png](postman%2Fimage%20%282%29.png)
+![image (3).png](postman%2Fimage%20%283%29.png)
 
 Note: The CliendID and Secret you need to get an auth token are already configured in the collection variables.
 
