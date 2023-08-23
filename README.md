@@ -24,7 +24,8 @@ this demo UI, and you can also find the credentials in the postman collection.
 Note: Postman is required, download it [here](https://www.postman.com/downloads/) if needed.
 
 Here is a collection of calls you can make to our demo api,
-You can either clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
+You can either: 
+clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
 or go [githhub/fintech-devcon-demo-react-vite](https://github.com/modusintegration/fintech-devcon-demo-react-vite/blob/main/postman/moov-lab-portx-oba-proc-api.postman_collection.json)
 and click the `Download raw file` on the right side of the screen.
 
