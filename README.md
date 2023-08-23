@@ -3,7 +3,7 @@
 ## Purpose
 The purpose of this session is to show how to build, deploy, and monitor an app that conencts to many Cores with an open source Stack (Apachec Cam/ArgoCD/Grafana).
 This UI is interacting with both Mambu and CSI cores.
-In the UI you will be able to send money back and forth.
+In the UI you will be able to send money back and forth to other attendees.
 
 ## API Docs
 https://workshop.dev.custom.demos.tenant-1.portx.io/portx-openbanking-docs/
