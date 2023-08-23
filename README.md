@@ -1,8 +1,8 @@
 # fintech-devcon-demo-react-vite
 
 ## Purpose
-The purpose of this demo is to show how PortX deploys an SSO app with our Stack (Github/AWS/ArgoCD/Grafana).
-This UI is interacting with both mambu and cis cores.
+The purpose of this session is to show how to build, deploy, and monitor an app that conencts to many Cores with an open source Stack (Apachec Cam/ArgoCD/Grafana).
+This UI is interacting with both Mambu and CSI cores.
 In the UI you will be able to send money back and forth.
 
 ## API Docs
@@ -47,6 +47,8 @@ open browser and navigate to http://localhost:80
 
 ### Run from internet
 https://rjflh9-5173.csb.app/
+
+### Chalenge - pitch your startup idea and get others to invest using the app!
 
 ## Deployment configuration
 - GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
