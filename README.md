@@ -17,9 +17,9 @@ have access to `operator`, the credentials have been hardcoded in
 this demo UI, and you can also find the credentials in the postman collection.
 
 ## Postman Collection for ORCA (Open Reusable Core API)
-This is a collection of calls you can make to our demo api.
-
 Note: Postman is required, download it [here](https://www.postman.com/downloads/) if needed.
+
+### Insallation
 
 You can either: 
 - clone the repo, and find it [postman/moov-lab-portx-oba-proc-api.postman_collection.json](postman%2Fmoov-lab-portx-oba-proc-api.postman_collection.json)
