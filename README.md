@@ -48,12 +48,15 @@ The code is in this repo in SSO branch
 - GitOps Repo (dev branch): https://github.com/modusintegration/demobank-gitops/tree/dev
 
 ### Run local with docker
+(use main branch)
 make build
 make run
 open browser and navigate to http://localhost:80
 
 ### Run App (hosting in PortX cluster)
 https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io/
+User: FintechDevcon
+Pwd: Austin2023
 
 ### Challenge - pitch your startup idea and get others to invest using the app!
 
