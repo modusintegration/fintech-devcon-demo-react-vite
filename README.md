@@ -32,8 +32,13 @@ Import the postman collection - once in postman go to file import and find the c
 
 Once Imported you should see a collection like bellow, to configure auth you need to click on the collection `moov-lab-portx-oba-proc-api`, the `Authorization` tab:
 ![image (1).png](postman%2Fimage%20%281%29.png)
+
+Scroll down the `Authorization` till you see `Configure New Token` then fill out `Token Name` then go to the bottom of the
+page and click the button `Generate New Access Tocken` you then should see:
 ![image (2).png](postman%2Fimage%20%282%29.png)
+Click the button `Proceed` you then should see:
 ![image (3).png](postman%2Fimage%20%283%29.png)
+Click the button `Use Token`, now you should be able to make correctly configured calls in the `moov-lab-portx-oba-proc-api` collection
 
 ## Sample API built with Apache Camel - Core API for Mambu
 Go here to explore our Mambu core api repo https://github.com/modusintegration/mambu-portx-cbs-connector
