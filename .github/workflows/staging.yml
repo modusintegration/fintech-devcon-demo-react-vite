@@ -2,7 +2,7 @@ name: Staging Deployment
 
 on:
   push:
-    branches: [main] # switch to main for test
+    branches: [feat/sso] # switch to main for test
 
 jobs:
   deploy-docker-image:
