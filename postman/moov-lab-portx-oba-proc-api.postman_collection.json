@@ -1951,7 +1951,7 @@
 		},
 		{
 			"key": "host",
-			"value": "https://portx-oba-proc-api.dev.pre.demobank.tenants.portx.io",
+			"value": "https://portx-oba-proc-api.dev.demobank.tenants.portx.io",
 			"type": "string"
 		},
 		{
@@ -1961,7 +1961,7 @@
 		},
 		{
 			"key": "accessTokenUrl",
-			"value": "https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
+			"value": "https://keycloak.dev.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
 			"type": "string"
 		},
 		{

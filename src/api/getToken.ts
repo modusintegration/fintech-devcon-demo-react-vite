@@ -17,7 +17,7 @@ function getToken(): Promise<string> {
   };
 
   return fetch(
-    "https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
+    "https://keycloak.dev.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
     requestOptions
   )
     .then((response) => response.json())
