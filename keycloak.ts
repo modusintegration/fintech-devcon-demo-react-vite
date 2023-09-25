@@ -5,9 +5,9 @@ const onSigninCallback = (): void => {
 };
 
 export const oidcConfig: AuthProviderProps = {
-  authority: 'https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/demobank',
+  authority: 'https://keycloak.dev.piam.psps.tenants.portx.io/realms/demobank',
   client_id: 'fintech-devcon-demo-react-vite',
   redirect_uri: window.location.href,
-  post_logout_redirect_uri: 'https://fintech-devcon-demo-react-vite.dev.pre.demobank.tenants.portx.io',
+  post_logout_redirect_uri: 'https://fintech-devcon-demo-react-vite.dev.demobank.tenants.portx.io',
   onSigninCallback,
 };
