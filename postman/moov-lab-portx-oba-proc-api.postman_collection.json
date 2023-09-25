@@ -1961,7 +1961,7 @@
 		},
 		{
 			"key": "accessTokenUrl",
-			"value": "https://keycloak.dev.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
+			"value": "https://keycloak.dev.pre.piam.psps.tenants.portx.io/realms/demobank/protocol/openid-connect/token",
 			"type": "string"
 		},
 		{
